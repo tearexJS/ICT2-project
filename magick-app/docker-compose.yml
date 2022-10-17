@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  magick-app:
+    image: magick-app
+    build: .
+    environment:
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    command: npm run dev
+    volumes:
+      # mount current dir into docker container
+      - .:/magick-app
+      # ignore local node_modules, use container
+      - /magick-app/node_modules
