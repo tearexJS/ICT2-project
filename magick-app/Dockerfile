@@ -1,10 +1,15 @@
 FROM node:6.1.0-wheezy
 
-RUN mkdir /usr/src/magick
-COPY . /usr/src/magick
-WORKDIR /usr/src/magick
+# RUN mkdir /usr/src/magick
+# COPY . /usr/src/magick
+WORKDIR /magick-app
 
-RUN npm install 
+# Copy package.json, packge-lock.json into current dir
+COPY ["package.json", "package-lock.json*", "./"]
+
+RUN npm install
+# COPY . .
+
 RUN echo deb http://archive.debian.org/debian wheezy main > /etc/apt/sources.list
 RUN echo deb http://archive.debian.org/debian-archive/debian-security/ wheezy updates/main >> /etc/apt/sources.list
 RUN apt-get update

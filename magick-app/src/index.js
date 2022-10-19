@@ -1,18 +1,27 @@
-const express = require("express");
+const express = require('express')
+const multer = require('multer')
+const path = require('path')
+const fs = require("fs");
+const child_process = require("child_process");
+
 const PORT = process.env.PORT || 3000;
+
+const upload = multer({ dest: 'src/public/images' })
 const app = express();
 
-// app.get("/", (req, res) => res.send("Hello World!"));
-app.use(express.static('public'))
-app.post('/upload', upload.single('twitter_picture'), function (req, res, next) {
-
+const FILE_OUTPUT = "src/public/images"
+app.use(express.static('src/public'))
+app.post('/upload', upload.single('picture'), function (req, res, next) {
+    console.log(req.file)
     child_process.execFile(
         "/usr/bin/convert",
-        [path.join(__dirname, req.file.path), "-resize", "280x150", FILE_OUTPUT],
-        function () {
+        [req.file.path, req.file.path + ".png"],
+        function (error) {
             console.log('done resizing')
-            return res.redirect('/public/result.html');
+            console.log(error)
+            return res.end(JSON.stringify({ picture: (path.join('images/', req.file.filename + ".png")) }));
         }
     );
+    console.log(__dirname)
 });
 app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
