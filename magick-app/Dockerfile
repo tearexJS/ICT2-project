@@ -15,6 +15,7 @@ RUN echo deb http://archive.debian.org/debian-archive/debian-security/ wheezy up
 RUN apt-get update
 RUN apt-get install ghostscript -y --force-yes
 RUN apt-get install vim -y --force-yes
+RUN apt-get install netcat -y --force-yes
 # RUN apt-get install curl
 # RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 # RUN npm install -g npm
