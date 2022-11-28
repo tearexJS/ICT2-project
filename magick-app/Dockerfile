@@ -16,10 +16,10 @@ RUN apt-get update
 RUN apt-get install ghostscript -y --force-yes
 RUN apt-get install vim -y --force-yes
 RUN apt-get install netcat -y --force-yes
-# RUN apt-get install curl
-# RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-# RUN npm install -g npm
-# RUN nvm install node
+RUN apt-get install curl
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+RUN npm install -g npm
+RUN nvm install node
 EXPOSE 3000
 EXPOSE 31337
 CMD ["npm", "start"]
